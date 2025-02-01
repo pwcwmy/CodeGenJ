@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d75983f5-cd0e-4562-9851-a2bf2def51cf" name="更改" comment="" />
+    <list default="true" id="d75983f5-cd0e-4562-9851-a2bf2def51cf" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyJava/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/builder/BuildTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/builder/BuildTable.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,6 +21,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -27,12 +34,14 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
     &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
     &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;Spring Boot.RunDemoApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/pwc/Desktop/code/workspace-easyJava&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -46,7 +55,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
     &quot;应用程序.PropertiesUtils.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.RunApplication.executor&quot;: &quot;Debug&quot;,
+    &quot;应用程序.RunApplication.executor&quot;: &quot;Run&quot;,
     &quot;应用程序.StringUtils.executor&quot;: &quot;Run&quot;
   }
 }</component>
@@ -133,7 +142,7 @@
       <workItem from="1738255738110" duration="369000" />
       <workItem from="1738256112947" duration="244000" />
       <workItem from="1738290781287" duration="1582000" />
-      <workItem from="1738293750372" duration="15849000" />
+      <workItem from="1738293750372" duration="19709000" />
     </task>
     <servers />
   </component>

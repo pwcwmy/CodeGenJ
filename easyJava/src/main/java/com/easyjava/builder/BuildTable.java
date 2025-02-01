@@ -3,6 +3,7 @@ package com.easyjava.builder;
 import com.easyjava.bean.Constants;
 import com.easyjava.bean.FieldInfo;
 import com.easyjava.bean.TableInfo;
+import com.easyjava.utils.JsonUtils;
 import com.easyjava.utils.PropertiesUtils;
 
 import java.sql.*;
@@ -10,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.easyjava.utils.StringUtils;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +23,8 @@ public class BuildTable {
     // 定义几个关键的数据库sql
     private static String SQL_SHOW_TABLE_STATUS = "show table status";
     private static String SQL_SHOW_TABLE_FIELDS = "show full fields from %s";
+    private static String SQL_SHOW_TABLE_INDEX = "show index from %s";
+
 
     // 初始化类时连接数据库
     static {
@@ -62,7 +64,9 @@ public class BuildTable {
                 tableInfo.setBeanParamName(beanName + Constants.SUFFIX_BEAN_PARAMS); // 示例：UserInfoQuery
                 // 2. 设置具体字段信息
                 tableInfo.setFieldList(readFieldInfo(tableInfo));
-
+                // 3. 读取索引并设置tableInfo的keyIndexMap
+                readKeyIndexInfo(tableInfo);
+                logger.info("tableInfo: {}", JsonUtils.convertObject2Json(tableInfo));
                 // 检验set是否漏字段
                 // logger.info("表: {}， 备注: {}, JavaBean: {}, JavaParamBean: {}", tableInfo.getTableName(), tableInfo.getComment(), tableInfo.getBeanName(), tableInfo.getBeanParamName());
             }
@@ -94,6 +98,11 @@ public class BuildTable {
 
     }
 
+    /**
+     * 读取字段信息
+     * @param tableInfo
+     * @return
+     */
     private static List<FieldInfo> readFieldInfo(TableInfo tableInfo) {
         List<FieldInfo> fieldInfoList = new ArrayList<>();
         PreparedStatement ps = null;
@@ -119,16 +128,10 @@ public class BuildTable {
                 fieldInfo.setSqlType(type);
                 fieldInfo.setJavaType(processJavaType(type));
                 fieldInfo.setAutoIncrement("auto_increment".equalsIgnoreCase(extra));
-
-                if (ArrayUtils.contains(Constants.SQL_DATE_TYPES, type)) {
-                    tableInfo.setHaveDate(true);
-                }
-                if (ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, type)) {
-                    tableInfo.setHaveDatetime(true);
-                }
-                if (ArrayUtils.contains(Constants.SQL_DECIMAL_TYPES, type)) {
-                    tableInfo.setHaveBigDecimal(true);
-                }
+                // if-else 简化写法
+                tableInfo.setHaveDate(ArrayUtils.contains(Constants.SQL_DATE_TYPES, type));
+                tableInfo.setHaveDatetime(ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, type));
+                tableInfo.setHaveBigDecimal(ArrayUtils.contains(Constants.SQL_DECIMAL_TYPES, type));
 
 //                logger.info("fieldName: {}, comment: {}, propertyName: {}, sqlType: {}, javaType: {}, autoIncrement: {}",
 //                        fieldInfo.getFieldName(), fieldInfo.getComment(), fieldInfo.getPropertyName(), fieldInfo.getSqlType(), fieldInfo.getJavaType(), fieldInfo.getAutoIncrement());
@@ -161,6 +164,61 @@ public class BuildTable {
         }
         return fieldInfoList;
     }
+
+    /**
+     * 读取索引信息
+     * @param tableInfo
+     * @return
+     */
+    private static List<FieldInfo> readKeyIndexInfo(TableInfo tableInfo) {
+        List<FieldInfo> fieldInfoList = new ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet fieldResult = null;
+        try {
+            ps = conn.prepareStatement(String.format(SQL_SHOW_TABLE_INDEX, tableInfo.getTableName()));
+            fieldResult = ps.executeQuery();
+            while (fieldResult.next()) {
+                String keyName = fieldResult.getString("key_name");
+                String columnName = fieldResult.getString("column_name");
+                Integer nonUnique = fieldResult.getInt("non_unique");
+                if (nonUnique == 1) { // 1:普通索引, 跳过，只处理0表示的唯一索引
+                    continue;
+                }
+                // 这里逻辑对吗
+                // 先去拿，null就创建，接着根据columnName往里面添加fieldInfo
+                List<FieldInfo> keyFieldList = tableInfo.getKeyIndexMap().get(keyName);
+                if (null == keyFieldList) {
+                    keyFieldList = new ArrayList<>();
+                    tableInfo.getKeyIndexMap().put(keyName, keyFieldList);
+                }
+                for (FieldInfo fieldInfo : tableInfo.getFieldList()) {
+                    if (fieldInfo.getFieldName().equals(columnName)) {
+                        keyFieldList.add(fieldInfo);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("获取索引信息失败", e);
+        } finally {
+            if (fieldResult != null) {
+                try {
+                    fieldResult.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return fieldInfoList;
+    }
+
+
 
     private static String processFiled(String field, Boolean upperCaseFirstLetter) {
         StringBuffer sb = new StringBuffer();
