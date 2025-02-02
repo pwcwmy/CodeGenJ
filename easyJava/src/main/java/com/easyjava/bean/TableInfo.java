@@ -32,15 +32,15 @@ public class TableInfo {
     /**
      * 是否有日期类型
      */
-    private Boolean haveDate;
+    private Boolean haveDate = false;
     /**
      * 是否有datetime类型
      */
-    private Boolean haveDatetime;
+    private Boolean haveDatetime = false;
     /**
      * 是否有BigDecimal类型
      */
-    private Boolean haveBigDecimal;
+    private Boolean haveBigDecimal = false;
 
     // Getter Setter如下
     public String getTableName() {

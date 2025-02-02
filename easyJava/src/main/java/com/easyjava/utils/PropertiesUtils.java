@@ -14,6 +14,8 @@ public class PropertiesUtils {
         InputStream is = null;
         try {
             is = PropertiesUtils.class.getClassLoader().getResourceAsStream("application.properties");
+            // 如果需要读中文配置
+            // new InputStream(is, "gbk") 根据idea的file encoding一致
             props.load(is);
 
             Iterator<Map.Entry<Object, Object>> iterator = props.entrySet().iterator();

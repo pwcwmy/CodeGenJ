@@ -24,7 +24,7 @@ public class FieldInfo {
     /**
      * 字段是否自增长
      */
-    private Boolean isAutoIncrement;
+    private Boolean isAutoIncrement = false;
 
     public String getFieldName() {
         return fieldName;

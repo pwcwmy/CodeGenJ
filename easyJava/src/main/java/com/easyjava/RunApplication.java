@@ -1,9 +1,19 @@
 package com.easyjava;
 
-import com.easyjava.builder.BuildTable;
+import com.easyjava.bean.TableInfo;
+import com.easyjava.builder.*;
+import java.util.List;
 
 public class RunApplication {
     public static void main(String[] args) {
-        BuildTable.getTables();
+        List<TableInfo> tableInfoList = BuildTable.getTables();
+        BuildBase.execute();
+        for (TableInfo tableInfo : tableInfoList) {
+            BuildPo.execute(tableInfo);
+
+            BuildQuery.execute(tableInfo);
+
+            BuildMapper.execute(tableInfo);
+        }
     }
 }

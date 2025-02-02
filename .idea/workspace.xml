@@ -6,8 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="d75983f5-cd0e-4562-9851-a2bf2def51cf" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easyJava/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/RunApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/RunApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/bean/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/bean/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/bean/FieldInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/bean/FieldInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/bean/TableInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/bean/TableInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/builder/BuildTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/builder/BuildTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/utils/PropertiesUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/utils/PropertiesUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyJava/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +33,9 @@
   &quot;associatedIndex&quot;: 7
 }</component>
   <component name="ProjectId" id="2sM99eRpyAWWB10FcWYhT0AY1Xq" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -52,20 +60,36 @@
     &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
+    &quot;应用程序.BuildTable.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.Constants.executor&quot;: &quot;Run&quot;,
     &quot;应用程序.PropertiesUtils.executor&quot;: &quot;Run&quot;,
     &quot;应用程序.RunApplication.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.StringUtils.executor&quot;: &quot;Run&quot;
+    &quot;应用程序.StringUtils.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.UserInfo.executor&quot;: &quot;Run&quot;
   }
 }</component>
   <component name="RunManager" selected="应用程序.RunApplication">
-    <configuration name="PropertiesUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.easyjava.utils.PropertiesUtils" />
+    <configuration name="BuildTable" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.easyjava.builder.BuildTable" />
       <module name="easyJava" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.easyjava.utils.*" />
+          <option name="PATTERN" value="com.easyjava.builder.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Constants" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.easyjava.bean.Constants" />
+      <module name="easyJava" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.easyjava.bean.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -99,12 +123,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RunDemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+    <configuration name="UserInfo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.easyjava.entity.po.UserInfo" />
       <module name="easyJava-demo" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.easyjava.RunDemoApplication" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.easyjava.*" />
+          <option name="PATTERN" value="com.easyjava.entity.po.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -115,9 +139,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="应用程序.RunApplication" />
+        <item itemvalue="应用程序.Constants" />
+        <item itemvalue="应用程序.UserInfo" />
+        <item itemvalue="应用程序.BuildTable" />
         <item itemvalue="应用程序.StringUtils" />
-        <item itemvalue="应用程序.PropertiesUtils" />
-        <item itemvalue="Spring Boot.RunDemoApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -142,7 +167,7 @@
       <workItem from="1738255738110" duration="369000" />
       <workItem from="1738256112947" duration="244000" />
       <workItem from="1738290781287" duration="1582000" />
-      <workItem from="1738293750372" duration="19709000" />
+      <workItem from="1738293750372" duration="65140000" />
     </task>
     <servers />
   </component>
@@ -152,12 +177,17 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/easyJava-demo/src/main/java/com/easyjava/RunDemoApplication.java</url>
-          <line>7</line>
-          <option name="timeStamp" value="1" />
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/bean/Constants.java</url>
+          <line>83</line>
+          <properties field="SUFFIX_MAPPER" class="com.easyjava.bean.Constants" />
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

@@ -3,12 +3,13 @@ package com.easyjava.builder;
 import com.easyjava.bean.Constants;
 import com.easyjava.bean.FieldInfo;
 import com.easyjava.bean.TableInfo;
-import com.easyjava.utils.JsonUtils;
 import com.easyjava.utils.PropertiesUtils;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.easyjava.utils.StringUtils;
 import org.apache.commons.lang3.ArrayUtils;
@@ -40,7 +41,7 @@ public class BuildTable {
         }
     }
 
-    public static void getTables() {
+    public static List<TableInfo> getTables() {
         PreparedStatement ps = null;
         ResultSet tableResult = null;
         List<TableInfo> tableInfoList = new ArrayList<>();
@@ -55,20 +56,21 @@ public class BuildTable {
                 if (Constants.IGNORE_TABLE_PREFIX) {
                     beanName = tableName.substring(beanName.indexOf("_") + 1);
                 }
-                beanName = processFiled(beanName, true);
+                beanName = processField(beanName, true);
                 // 集中set, 常见bug: 漏set字段
                 // 1. 设置基本属性
                 tableInfo.setTableName(tableName);
                 tableInfo.setBeanName(beanName);
                 tableInfo.setComment(comment);
-                tableInfo.setBeanParamName(beanName + Constants.SUFFIX_BEAN_PARAMS); // 示例：UserInfoQuery
+                tableInfo.setBeanParamName(beanName + Constants.SUFFIX_BEAN_QUERY); // 示例：UserInfoQuery
                 // 2. 设置具体字段信息
                 tableInfo.setFieldList(readFieldInfo(tableInfo));
                 // 3. 读取索引并设置tableInfo的keyIndexMap
                 readKeyIndexInfo(tableInfo);
-                logger.info("tableInfo: {}", JsonUtils.convertObject2Json(tableInfo));
                 // 检验set是否漏字段
+                // logger.info("tableInfo: {}", JsonUtils.convertObject2Json(tableInfo));
                 // logger.info("表: {}， 备注: {}, JavaBean: {}, JavaParamBean: {}", tableInfo.getTableName(), tableInfo.getComment(), tableInfo.getBeanName(), tableInfo.getBeanParamName());
+                tableInfoList.add(tableInfo);
             }
         } catch (Exception e) {
             logger.error("读取表信息失败", e);
@@ -95,7 +97,7 @@ public class BuildTable {
                 }
             }
         }
-
+        return tableInfoList;
     }
 
     /**
@@ -124,15 +126,23 @@ public class BuildTable {
                 // 集中set
                 fieldInfo.setFieldName(fieldName);
                 fieldInfo.setComment(comment);
-                fieldInfo.setPropertyName(processFiled(fieldName, false));
+                fieldInfo.setPropertyName(processField(fieldName, false));
                 fieldInfo.setSqlType(type);
                 fieldInfo.setJavaType(processJavaType(type));
                 fieldInfo.setAutoIncrement("auto_increment".equalsIgnoreCase(extra));
-                // if-else 简化写法
-                tableInfo.setHaveDate(ArrayUtils.contains(Constants.SQL_DATE_TYPES, type));
-                tableInfo.setHaveDatetime(ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, type));
-                tableInfo.setHaveBigDecimal(ArrayUtils.contains(Constants.SQL_DECIMAL_TYPES, type));
-
+                // if-else 简化写法 不能在循环里反复set，不然true会被set成false
+//                tableInfo.setHaveDate(ArrayUtils.contains(Constants.SQL_DATE_TYPES, type));
+//                tableInfo.setHaveDatetime(ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, type));
+//                tableInfo.setHaveBigDecimal(ArrayUtils.contains(Constants.SQL_DECIMAL_TYPES, type));
+                if (ArrayUtils.contains(Constants.SQL_DATE_TYPES, type)) {
+                    tableInfo.setHaveDate(true);
+                }
+                if (ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, type)) {
+                    tableInfo.setHaveDatetime(true);
+                }
+                if (ArrayUtils.contains(Constants.SQL_DECIMAL_TYPES, type)) {
+                    tableInfo.setHaveBigDecimal(true);
+                }
 //                logger.info("fieldName: {}, comment: {}, propertyName: {}, sqlType: {}, javaType: {}, autoIncrement: {}",
 //                        fieldInfo.getFieldName(), fieldInfo.getComment(), fieldInfo.getPropertyName(), fieldInfo.getSqlType(), fieldInfo.getJavaType(), fieldInfo.getAutoIncrement());
             }
@@ -166,15 +176,18 @@ public class BuildTable {
     }
 
     /**
-     * 读取索引信息
+     * 读取索引信息并set tableInfo
      * @param tableInfo
-     * @return
      */
-    private static List<FieldInfo> readKeyIndexInfo(TableInfo tableInfo) {
-        List<FieldInfo> fieldInfoList = new ArrayList<>();
+    private static void readKeyIndexInfo(TableInfo tableInfo) {
         PreparedStatement ps = null;
         ResultSet fieldResult = null;
         try {
+//            在while外部缓存一个key为columnName,value为FieldInfo的Map
+            Map<String, FieldInfo> tempMap = new HashMap<>();
+            for (FieldInfo fieldInfo : tableInfo.getFieldList()) {
+                tempMap.put(fieldInfo.getFieldName(), fieldInfo);
+            }
             ps = conn.prepareStatement(String.format(SQL_SHOW_TABLE_INDEX, tableInfo.getTableName()));
             fieldResult = ps.executeQuery();
             while (fieldResult.next()) {
@@ -184,18 +197,19 @@ public class BuildTable {
                 if (nonUnique == 1) { // 1:普通索引, 跳过，只处理0表示的唯一索引
                     continue;
                 }
-                // 这里逻辑对吗
+                // 这里逻辑对吗, 可以减少循环，已优化
                 // 先去拿，null就创建，接着根据columnName往里面添加fieldInfo
                 List<FieldInfo> keyFieldList = tableInfo.getKeyIndexMap().get(keyName);
                 if (null == keyFieldList) {
                     keyFieldList = new ArrayList<>();
                     tableInfo.getKeyIndexMap().put(keyName, keyFieldList);
                 }
-                for (FieldInfo fieldInfo : tableInfo.getFieldList()) {
+                /*for (FieldInfo fieldInfo : tableInfo.getFieldList()) {
                     if (fieldInfo.getFieldName().equals(columnName)) {
                         keyFieldList.add(fieldInfo);
                     }
-                }
+                }*/
+                keyFieldList.add(tempMap.get(columnName));
             }
         } catch (SQLException e) {
             logger.error("获取索引信息失败", e);
@@ -215,12 +229,11 @@ public class BuildTable {
                 }
             }
         }
-        return fieldInfoList;
     }
 
 
 
-    private static String processFiled(String field, Boolean upperCaseFirstLetter) {
+    private static String processField(String field, Boolean upperCaseFirstLetter) {
         StringBuffer sb = new StringBuffer();
         String[] fields = field.split("_");
         sb.append(upperCaseFirstLetter ? StringUtils.upperCaseFirstLetter(fields[0]) : fields[0]);
@@ -245,5 +258,11 @@ public class BuildTable {
         } else {
             throw new RuntimeException("无法识别的类型：" + type);
         }
+    }
+
+
+    public static void main(String[] args) {
+        String[] strings = {"a", "b", "c", "d", "e", "f", "g", "h"};
+        System.out.println(ArrayUtils.contains(strings, "a"));
     }
 }
