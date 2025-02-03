@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BuildQuery {
-    public static final Logger logger = LoggerFactory.getLogger(BuildPo.class);
+    public static final Logger logger = LoggerFactory.getLogger(BuildQuery.class);
 
     public static void execute(TableInfo tableInfo) {
         File folder = new File(Constants.PATH_QUERY);
@@ -45,62 +45,43 @@ public class BuildQuery {
 
             bw.newLine();
             BuildComment.createClassComment(bw, tableInfo.getComment() + "查询对象");
-            bw.write("public class " + className + " {\n");
+            bw.write("public class " + className + " extends BaseQuery {\n");
 
-            List<FieldInfo> extendList = new ArrayList<>();
+//            List<FieldInfo> extendList = new ArrayList<>();
             // 开始生成类的各个字段属性
             for (FieldInfo fieldInfo : tableInfo.getFieldList()) {
                 BuildComment.createFieldComment(bw, fieldInfo.getComment());
                 bw.write("\tprivate " + fieldInfo.getJavaType() + " " + fieldInfo.getPropertyName() + ";\n\n");
                 if (ArrayUtils.contains(Constants.SQL_STRING_TYPES, fieldInfo.getSqlType())) {
                     bw.write("\tprivate " + fieldInfo.getJavaType() + " " + fieldInfo.getPropertyName() + Constants.SUFFIX_BEAN_QUERY_FUZZY + ";\n\n");
-                    FieldInfo fuzzyFieldInfo = new FieldInfo();
-                    fuzzyFieldInfo.setPropertyName(fieldInfo.getPropertyName() + Constants.SUFFIX_BEAN_QUERY_FUZZY);
-                    fuzzyFieldInfo.setJavaType(fieldInfo.getJavaType());
-                    extendList.add(fuzzyFieldInfo);
+//                    FieldInfo fuzzyFieldInfo = new FieldInfo();
+//                    fuzzyFieldInfo.setPropertyName(fieldInfo.getPropertyName() + Constants.SUFFIX_BEAN_QUERY_FUZZY);
+//                    fuzzyFieldInfo.setJavaType(fieldInfo.getJavaType());
+//                    extendList.add(fuzzyFieldInfo);
                 }
-                // 要为fuzzy字段生成set get方法，最简单的是加到tableInfo的fieldList, 但不能边循环边添加！
+                // 要为Fuzzy, TimeStart等扩展字段生成set get方法，最简单的是加到tableInfo的fieldList, 但不能边循环边添加！
                 if (ArrayUtils.contains(Constants.SQL_DATE_TYPES, fieldInfo.getSqlType()) || ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, fieldInfo.getSqlType())) {
                     // 查的时候用String 不用Date
                     bw.write("\tprivate String " + fieldInfo.getPropertyName() + Constants.SUFFIX_BEAN_QUERY_DATE_START + ";\n\n");
                     bw.write("\tprivate String " + fieldInfo.getPropertyName() + Constants.SUFFIX_BEAN_QUERY_DATE_END + ";\n\n");
-                    FieldInfo timeStartFieldInfo = new FieldInfo();
-                    timeStartFieldInfo.setPropertyName(fieldInfo.getPropertyName() + Constants.SUFFIX_BEAN_QUERY_DATE_START);
-                    timeStartFieldInfo.setJavaType("String");
-                    extendList.add(timeStartFieldInfo);
-                    FieldInfo timeEndFieldInfo = new FieldInfo();
-                    timeEndFieldInfo.setPropertyName(fieldInfo.getPropertyName() + Constants.SUFFIX_BEAN_QUERY_DATE_END);
-                    timeEndFieldInfo.setJavaType("String");
-                    extendList.add(timeEndFieldInfo);
+                    // 在这里add不合适，不如在buildTable 就add进extendFieldList
+//                    FieldInfo timeStartFieldInfo = new FieldInfo();
+//                    timeStartFieldInfo.setPropertyName(fieldInfo.getPropertyName() + Constants.SUFFIX_BEAN_QUERY_DATE_START);
+//                    timeStartFieldInfo.setJavaType("String");
+//                    extendList.add(timeStartFieldInfo);
+//                    FieldInfo timeEndFieldInfo = new FieldInfo();
+//                    timeEndFieldInfo.setPropertyName(fieldInfo.getPropertyName() + Constants.SUFFIX_BEAN_QUERY_DATE_END);
+//                    timeEndFieldInfo.setJavaType("String");
+//                    extendList.add(timeEndFieldInfo);
                 }
             }
             // 将fuzzy timeStart timeEnd等字段加入fieldInfoList(只影响get set）
-            List<FieldInfo> fieldInfoList = tableInfo.getFieldList();
-            fieldInfoList.addAll(extendList);
+//            List<FieldInfo> fieldInfoList = tableInfo.getFieldList();
+//            fieldInfoList.addAll(extendList);
 
             // 开始生成get set 方法
-            for (FieldInfo fieldInfo : fieldInfoList) {
-                // 对特殊的Boolean is_deleted getDeleted setDeleted
-                if (null != fieldInfo.getFieldName() && fieldInfo.getFieldName().startsWith("is_")) { // 数据库没有bool，所以这里不判断bool
-                    bw.write("\tpublic " + fieldInfo.getJavaType() + " get" + fieldInfo.getPropertyName().substring(2) + "() {\n");
-                    bw.write("\t\treturn this." + fieldInfo.getPropertyName() + ";\n");
-                    bw.write("\t}\n\n");
-                    //set
-                    bw.write("\tpublic void set" + fieldInfo.getPropertyName().substring(2) + "(" + fieldInfo.getJavaType() + " " + fieldInfo.getPropertyName() + ") {\n");
-                    bw.write("\t\tthis." + fieldInfo.getPropertyName() + " = " + fieldInfo.getPropertyName() + ";\n");
-                    bw.write("\t}\n\n");
-                    continue;
-                }
-
-                // getUserId
-                bw.write("\tpublic " + fieldInfo.getJavaType() + " get" + StringUtils.upperCaseFirstLetter(fieldInfo.getPropertyName()) + "() {\n");
-                bw.write("\t\treturn this." + fieldInfo.getPropertyName() + ";\n");
-                bw.write("\t}\n\n");
-                //set
-                bw.write("\tpublic void set" + StringUtils.upperCaseFirstLetter(fieldInfo.getPropertyName()) + "(" + fieldInfo.getJavaType() + " " + fieldInfo.getPropertyName() + ") {\n");
-                bw.write("\t\tthis." + fieldInfo.getPropertyName() + " = " + fieldInfo.getPropertyName() + ";\n");
-                bw.write("\t}\n\n");
-            }
+            buildGetAndSet(tableInfo.getFieldList(), bw);
+            buildGetAndSet(tableInfo.getExtendFieldList(), bw);
 
             StringBuffer sb = new StringBuffer(); // 用来构造toString
             int index = 0;
@@ -119,7 +100,7 @@ public class BuildQuery {
             public String toString() {*/
             bw.write("\t@Override\n");
             bw.write("\tpublic String toString() {\n");
-            bw.write("\t\treturn " + sb.toString() + ";\n");
+            bw.write("\t\treturn " + sb + ";\n");
             bw.write("\t}\n");
 
             // 最后一个} 类闭合
@@ -150,6 +131,32 @@ public class BuildQuery {
                 }
             }
 
+        }
+    }
+
+    private static void buildGetAndSet(List<FieldInfo> fieldInfoList, BufferedWriter bw) throws IOException {
+        for (FieldInfo fieldInfo : fieldInfoList) {
+            // 对特殊的Boolean is_deleted getDeleted setDeleted
+            // TODO: 处于JavaBean规范，这里的特殊处理会影响XMl的解析，如何权衡
+//            if (null != fieldInfo.getFieldName() && fieldInfo.getFieldName().startsWith("is_")) { // 数据库没有bool，所以这里不判断bool
+//                bw.write("\tpublic " + fieldInfo.getJavaType() + " get" + fieldInfo.getPropertyName().substring(2) + "() {\n");
+//                bw.write("\t\treturn this." + fieldInfo.getPropertyName() + ";\n");
+//                bw.write("\t}\n\n");
+//                //set
+//                bw.write("\tpublic void set" + fieldInfo.getPropertyName().substring(2) + "(" + fieldInfo.getJavaType() + " " + fieldInfo.getPropertyName() + ") {\n");
+//                bw.write("\t\tthis." + fieldInfo.getPropertyName() + " = " + fieldInfo.getPropertyName() + ";\n");
+//                bw.write("\t}\n\n");
+//                continue;
+//            }
+
+            // getUserId
+            bw.write("\tpublic " + fieldInfo.getJavaType() + " get" + StringUtils.upperCaseFirstLetter(fieldInfo.getPropertyName()) + "() {\n");
+            bw.write("\t\treturn this." + fieldInfo.getPropertyName() + ";\n");
+            bw.write("\t}\n\n");
+            //set
+            bw.write("\tpublic void set" + StringUtils.upperCaseFirstLetter(fieldInfo.getPropertyName()) + "(" + fieldInfo.getJavaType() + " " + fieldInfo.getPropertyName() + ") {\n");
+            bw.write("\t\tthis." + fieldInfo.getPropertyName() + " = " + fieldInfo.getPropertyName() + ";\n");
+            bw.write("\t}\n\n");
         }
     }
 }

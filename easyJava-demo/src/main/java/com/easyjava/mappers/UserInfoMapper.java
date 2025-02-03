@@ -1,12 +1,11 @@
 package com.easyjava.mappers;
 
-
 import org.apache.ibatis.annotations.Param;
 
 /**
  * @Description: 用户信息Mapper
  * @author: peter
- * @Date: 2025/02/33
+ * @Date: 2025/02/34
  */
 public interface UserInfoMapper<T, P> extends BaseMapper {
 	/**
@@ -17,7 +16,7 @@ public interface UserInfoMapper<T, P> extends BaseMapper {
 	/**
 	 * 根据UserId更新
 	 */
-	 Integer updateByUserId (@Param("Bean") T t, @Param("userId") String userId);
+	 Integer updateByUserId (@Param("bean") T t, @Param("userId") String userId);
 
 	/**
 	 * 根据UserId删除
@@ -32,7 +31,7 @@ public interface UserInfoMapper<T, P> extends BaseMapper {
 	/**
 	 * 根据Email更新
 	 */
-	 Integer updateByEmail (@Param("Bean") T t, @Param("email") String email);
+	 Integer updateByEmail (@Param("bean") T t, @Param("email") String email);
 
 	/**
 	 * 根据Email删除
@@ -47,7 +46,7 @@ public interface UserInfoMapper<T, P> extends BaseMapper {
 	/**
 	 * 根据Nickname更新
 	 */
-	 Integer updateByNickname (@Param("Bean") T t, @Param("nickname") String nickname);
+	 Integer updateByNickname (@Param("bean") T t, @Param("nickname") String nickname);
 
 	/**
 	 * 根据Nickname删除

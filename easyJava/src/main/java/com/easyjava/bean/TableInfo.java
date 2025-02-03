@@ -26,6 +26,10 @@ public class TableInfo {
      */
     private List<FieldInfo> fieldList;
     /**
+     * 扩展的字段信息，如Fuzzy, TimeStart, TimeEnd
+     */
+    private List<FieldInfo> extendFieldList;
+    /**
      * 唯一索引集合
      */
     private Map<String, List<FieldInfo>> keyIndexMap = new LinkedHashMap<>();
@@ -115,4 +119,11 @@ public class TableInfo {
         this.haveBigDecimal = haveBigDecimal;
     }
 
+    public List<FieldInfo> getExtendFieldList() {
+        return extendFieldList;
+    }
+
+    public void setExtendFieldList(List<FieldInfo> extendFieldList) {
+        this.extendFieldList = extendFieldList;
+    }
 }

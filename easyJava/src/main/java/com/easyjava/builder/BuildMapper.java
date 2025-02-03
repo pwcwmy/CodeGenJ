@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public class BuildMapper {
-    public static final Logger logger = LoggerFactory.getLogger(BuildPo.class);
+    public static final Logger logger = LoggerFactory.getLogger(BuildMapper.class);
 
     public static void execute(TableInfo tableInfo) {
         File folder = new File(Constants.PATH_MAPPERS);
@@ -60,10 +60,10 @@ public class BuildMapper {
                 BuildComment.createMethodComment(bw, "根据" + methodName + "查询");
                 bw.write("\t T selectBy" + methodName + " (" + paramName + ");\n\n");
 
-                // 更新多传一个Bean
-                // @Param("Bean") T t
+                // 更新多传一个Bean xml中bean是小写
+                // @Param("bean") T t
                 BuildComment.createMethodComment(bw, "根据" + methodName + "更新");
-                bw.write("\t Integer updateBy" + methodName + " (@Param(\"Bean\") T t, " + paramName + ");\n\n");
+                bw.write("\t Integer updateBy" + methodName + " (@Param(\"bean\") T t, " + paramName + ");\n\n");
 
                 BuildComment.createMethodComment(bw, "根据" + methodName + "删除");
                 bw.write("\t Integer deleteBy" + methodName + " (" + paramName + ");\n\n");

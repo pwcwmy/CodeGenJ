@@ -28,6 +28,23 @@ public class BuildBase {
         headerInfoList.add("package " + Constants.PACKAGE_MAPPERS + ";");
         build(headerInfoList, "BaseMapper", Constants.PATH_MAPPERS);
         headerInfoList.clear();
+
+        // 生成DateTimePatternEnum
+        headerInfoList.add("package " + Constants.PACKAGE_ENUMS + ";");
+        build(headerInfoList, "PageSizeEnum", Constants.PATH_ENUMS);
+        headerInfoList.clear();
+
+        // 生成SimplePage
+        // import com.easyjava.enums.PageSizeEnum;
+        headerInfoList.add("package " + Constants.PACKAGE_QUERY + ";");
+        headerInfoList.add("import " + Constants.PACKAGE_ENUMS + ".PageSizeEnum;\n");
+        build(headerInfoList, "SimplePage", Constants.PATH_QUERY);
+        headerInfoList.clear();
+
+        // 生成BaseQuery
+        headerInfoList.add("package " + Constants.PACKAGE_QUERY + ";");
+        build(headerInfoList, "BaseQuery", Constants.PATH_QUERY);
+        headerInfoList.clear();
     }
 
     private static void build(List<String> headerInfoList, String fileName, String outputPath) {

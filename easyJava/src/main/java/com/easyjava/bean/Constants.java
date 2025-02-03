@@ -85,6 +85,8 @@ public class Constants {
 
     public static String PACKAGE_MAPPERS;
     public static String PATH_MAPPERS;
+    public static String PACKAGE_MAPPERS_XML;
+    public static String PATH_MAPPERS_XML;
 
 
     static {
@@ -96,6 +98,7 @@ public class Constants {
         PACKAGE_UTILS = PACKAGE_BASE + "." + PropertiesUtils.getProperty("package.utils");
         PACKAGE_ENUMS = PACKAGE_BASE + "." + PropertiesUtils.getProperty("package.enums");
         PACKAGE_MAPPERS = PACKAGE_BASE + "." + PropertiesUtils.getProperty("package.mappers");
+        PACKAGE_MAPPERS_XML = PACKAGE_MAPPERS;
 
         PATH_BASE = PropertiesUtils.getProperty("path.base") + "java/" + PACKAGE_BASE.replace(".", "/");
         PATH_PO = PropertiesUtils.getProperty("path.base") + "java/" + PACKAGE_PO.replace(".", "/");
@@ -103,6 +106,7 @@ public class Constants {
         PATH_UTILS = PropertiesUtils.getProperty("path.base") + "java/" + PACKAGE_UTILS.replace(".", "/");
         PATH_ENUMS = PropertiesUtils.getProperty("path.base") + "java/" + PACKAGE_ENUMS.replace(".", "/");
         PATH_MAPPERS = PropertiesUtils.getProperty("path.base") + "java/" + PACKAGE_MAPPERS.replace(".", "/");
+        PATH_MAPPERS_XML = PropertiesUtils.getProperty("path.base") + "resources/" + PACKAGE_MAPPERS_XML.replace(".", "/");
 
         AUTHOR_COMMENT = PropertiesUtils.getProperty("author.comment");
 
@@ -135,7 +139,7 @@ public class Constants {
     public static final String[] SQL_LONG_TYPES = new String[]{"bigint"};
 
     public static void main(String[] args) {
-       System.out.println(PATH_MAPPERS);
+       System.out.println(PATH_MAPPERS_XML);
 
     }
 }

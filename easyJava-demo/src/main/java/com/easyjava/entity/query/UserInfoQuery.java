@@ -9,9 +9,9 @@ import com.easyjava.utils.DateUtils;
 /**
  * @Description: 用户信息查询对象
  * @author: peter
- * @Date: 2025/02/33
+ * @Date: 2025/02/34
  */
-public class UserInfoQuery {
+public class UserInfoQuery extends BaseQuery {
 	/**
 	 * 用户id
 	 */
@@ -117,11 +117,6 @@ public class UserInfoQuery {
 	 * 主题
 	 */
 	private Integer theme;
-
-	/**
-	 * 逻辑删除
-	 */
-	private Integer isDeleted;
 
 	public String getUserId() {
 		return this.userId;
@@ -251,14 +246,6 @@ public class UserInfoQuery {
 		this.theme = theme;
 	}
 
-	public Integer getDeleted() {
-		return this.isDeleted;
-	}
-
-	public void setDeleted(Integer isDeleted) {
-		this.isDeleted = isDeleted;
-	}
-
 	public String getUserIdFuzzy() {
 		return this.userIdFuzzy;
 	}
@@ -365,6 +352,6 @@ public class UserInfoQuery {
 
 	@Override
 	public String toString() {
-		return "用户id: " + (userId == null ? "空" : userId)  + ", 昵称: " + (nickname == null ? "空" : nickname)  + ", 邮箱: " + (email == null ? "空" : email)  + ", 密码: " + (password == null ? "空" : password)  + ", 0:女 1:男 2:未知: " + (sex == null ? "空" : sex)  + ", 出生日期: " + (birthday == null ? "空" : birthday)  + ", 学校: " + (school == null ? "空" : school)  + ", 个人介绍: " + (personIntroduction == null ? "空" : personIntroduction)  + ", 加入时间: " + (joinTime == null ? "空" : DateUtils.format(joinTime, DateTimePatternEnum.YYYY_MM_DD_HH_MM_SS.getPattern()))  + ", 最后登录时间: " + (lastLoginTime == null ? "空" : DateUtils.format(lastLoginTime, DateTimePatternEnum.YYYY_MM_DD_HH_MM_SS.getPattern()))  + ", 最后登录ip: " + (lastLoginIp == null ? "空" : lastLoginIp)  + ", 0:禁用 1:正常: " + (status == null ? "空" : status)  + ", 空间公告: " + (noticeInfo == null ? "空" : noticeInfo)  + ", 硬币总数: " + (totalCoinCount == null ? "空" : totalCoinCount)  + ", 当前硬币数: " + (currentCoinCount == null ? "空" : currentCoinCount)  + ", 主题: " + (theme == null ? "空" : theme)  + ", 逻辑删除: " + (isDeleted == null ? "空" : isDeleted)  + ", null: " + (userIdFuzzy == null ? "空" : userIdFuzzy)  + ", null: " + (nicknameFuzzy == null ? "空" : nicknameFuzzy)  + ", null: " + (emailFuzzy == null ? "空" : emailFuzzy)  + ", null: " + (passwordFuzzy == null ? "空" : passwordFuzzy)  + ", null: " + (birthdayFuzzy == null ? "空" : birthdayFuzzy)  + ", null: " + (schoolFuzzy == null ? "空" : schoolFuzzy)  + ", null: " + (personIntroductionFuzzy == null ? "空" : personIntroductionFuzzy)  + ", null: " + (joinTimeStart == null ? "空" : joinTimeStart)  + ", null: " + (joinTimeEnd == null ? "空" : joinTimeEnd)  + ", null: " + (lastLoginTimeStart == null ? "空" : lastLoginTimeStart)  + ", null: " + (lastLoginTimeEnd == null ? "空" : lastLoginTimeEnd)  + ", null: " + (lastLoginIpFuzzy == null ? "空" : lastLoginIpFuzzy)  + ", null: " + (noticeInfoFuzzy == null ? "空" : noticeInfoFuzzy) ;
+		return "用户id: " + (userId == null ? "空" : userId)  + ", 昵称: " + (nickname == null ? "空" : nickname)  + ", 邮箱: " + (email == null ? "空" : email)  + ", 密码: " + (password == null ? "空" : password)  + ", 0:女 1:男 2:未知: " + (sex == null ? "空" : sex)  + ", 出生日期: " + (birthday == null ? "空" : birthday)  + ", 学校: " + (school == null ? "空" : school)  + ", 个人介绍: " + (personIntroduction == null ? "空" : personIntroduction)  + ", 加入时间: " + (joinTime == null ? "空" : DateUtils.format(joinTime, DateTimePatternEnum.YYYY_MM_DD_HH_MM_SS.getPattern()))  + ", 最后登录时间: " + (lastLoginTime == null ? "空" : DateUtils.format(lastLoginTime, DateTimePatternEnum.YYYY_MM_DD_HH_MM_SS.getPattern()))  + ", 最后登录ip: " + (lastLoginIp == null ? "空" : lastLoginIp)  + ", 0:禁用 1:正常: " + (status == null ? "空" : status)  + ", 空间公告: " + (noticeInfo == null ? "空" : noticeInfo)  + ", 硬币总数: " + (totalCoinCount == null ? "空" : totalCoinCount)  + ", 当前硬币数: " + (currentCoinCount == null ? "空" : currentCoinCount)  + ", 主题: " + (theme == null ? "空" : theme) ;
 	}
 }

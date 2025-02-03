@@ -3,6 +3,7 @@ package com.easyjava.builder;
 import com.easyjava.bean.Constants;
 import com.easyjava.bean.FieldInfo;
 import com.easyjava.bean.TableInfo;
+import com.easyjava.utils.JsonUtils;
 import com.easyjava.utils.PropertiesUtils;
 
 import java.sql.*;
@@ -63,14 +64,14 @@ public class BuildTable {
                 tableInfo.setBeanName(beanName);
                 tableInfo.setComment(comment);
                 tableInfo.setBeanParamName(beanName + Constants.SUFFIX_BEAN_QUERY); // 示例：UserInfoQuery
-                // 2. 设置具体字段信息
-                tableInfo.setFieldList(readFieldInfo(tableInfo));
+                // 2. 设置具体字段信息, 新增：为tableInfo set extendFieldList
+                readFieldInfoSetFieldAndExtendField(tableInfo);
                 // 3. 读取索引并设置tableInfo的keyIndexMap
                 readKeyIndexInfo(tableInfo);
                 // 检验set是否漏字段
-                // logger.info("tableInfo: {}", JsonUtils.convertObject2Json(tableInfo));
                 // logger.info("表: {}， 备注: {}, JavaBean: {}, JavaParamBean: {}", tableInfo.getTableName(), tableInfo.getComment(), tableInfo.getBeanName(), tableInfo.getBeanParamName());
                 tableInfoList.add(tableInfo);
+                // logger.info(JsonUtils.convertObject2Json(tableInfo));
             }
         } catch (Exception e) {
             logger.error("读取表信息失败", e);
@@ -105,8 +106,9 @@ public class BuildTable {
      * @param tableInfo
      * @return
      */
-    private static List<FieldInfo> readFieldInfo(TableInfo tableInfo) {
+    private static void readFieldInfoSetFieldAndExtendField(TableInfo tableInfo) {
         List<FieldInfo> fieldInfoList = new ArrayList<>();
+        List<FieldInfo> extendFieldInfoList = new ArrayList<>();
         PreparedStatement ps = null;
         ResultSet fieldResult = null;
         try {
@@ -143,9 +145,37 @@ public class BuildTable {
                 if (ArrayUtils.contains(Constants.SQL_DECIMAL_TYPES, type)) {
                     tableInfo.setHaveBigDecimal(true);
                 }
+                if (ArrayUtils.contains(Constants.SQL_STRING_TYPES, fieldInfo.getSqlType())) {
+                    FieldInfo fuzzyFieldInfo = new FieldInfo();
+                    fuzzyFieldInfo.setPropertyName(fieldInfo.getPropertyName() + Constants.SUFFIX_BEAN_QUERY_FUZZY);
+                    fuzzyFieldInfo.setJavaType(fieldInfo.getJavaType());
+                    fuzzyFieldInfo.setFieldName(fieldInfo.getFieldName());
+                    fuzzyFieldInfo.setSqlType(fieldInfo.getSqlType());
+                    extendFieldInfoList.add(fuzzyFieldInfo);
+                }
+                // 要为Fuzzy, TimeStart等扩展字段生成set get方法，最简单的是加到tableInfo的fieldList, 但不能边循环边添加！
+                if (ArrayUtils.contains(Constants.SQL_DATE_TYPES, fieldInfo.getSqlType()) || ArrayUtils.contains(Constants.SQL_DATE_TIME_TYPES, fieldInfo.getSqlType())) {
+                    // 查的时候用String 不用Date
+                    // 在这里add不合适，不如在buildTable 就add进extendFieldList
+                    FieldInfo timeStartFieldInfo = new FieldInfo();
+                    timeStartFieldInfo.setPropertyName(fieldInfo.getPropertyName() + Constants.SUFFIX_BEAN_QUERY_DATE_START);
+                    timeStartFieldInfo.setJavaType("String");
+                    timeStartFieldInfo.setFieldName(fieldInfo.getFieldName());
+                    timeStartFieldInfo.setSqlType(fieldInfo.getSqlType());
+                    extendFieldInfoList.add(timeStartFieldInfo);
+                    FieldInfo timeEndFieldInfo = new FieldInfo();
+                    timeEndFieldInfo.setPropertyName(fieldInfo.getPropertyName() + Constants.SUFFIX_BEAN_QUERY_DATE_END);
+                    timeEndFieldInfo.setJavaType("String");
+                    timeEndFieldInfo.setFieldName(fieldInfo.getFieldName());
+                    timeEndFieldInfo.setSqlType(fieldInfo.getSqlType());
+                    extendFieldInfoList.add(timeEndFieldInfo);
+                }
 //                logger.info("fieldName: {}, comment: {}, propertyName: {}, sqlType: {}, javaType: {}, autoIncrement: {}",
 //                        fieldInfo.getFieldName(), fieldInfo.getComment(), fieldInfo.getPropertyName(), fieldInfo.getSqlType(), fieldInfo.getJavaType(), fieldInfo.getAutoIncrement());
-            }
+            } // while结束
+            // 设置tableInfo扩展字段
+            tableInfo.setFieldList(fieldInfoList);
+            tableInfo.setExtendFieldList(extendFieldInfoList);
         } catch (SQLException e) {
             logger.error("获取具体字段信息失败", e);
         } finally {
@@ -172,7 +202,7 @@ public class BuildTable {
 //                }
 //            }
         }
-        return fieldInfoList;
+        return;
     }
 
     /**
