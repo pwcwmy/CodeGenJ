@@ -9,13 +9,17 @@ public class RunApplication {
         List<TableInfo> tableInfoList = BuildTable.getTables();
         BuildBase.execute();
         for (TableInfo tableInfo : tableInfoList) {
-            BuildPo.execute(tableInfo);
+//            BuildPo.execute(tableInfo);
+//
+//            BuildQuery.execute(tableInfo);
+//
+//            BuildMapper.execute(tableInfo);
+//
+//            BuildMapperXml.execute(tableInfo);
 
-            BuildQuery.execute(tableInfo);
+            BuildService.execute(tableInfo);
 
-            BuildMapper.execute(tableInfo);
-
-            BuildMapperXml.execute(tableInfo);
+            BuildServiceImpl.execute(tableInfo);
         }
     }
 }

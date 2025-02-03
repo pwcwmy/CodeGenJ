@@ -81,12 +81,27 @@ public class Constants {
     public static String SUFFIX_BEAN_QUERY_FUZZY;
     public static String SUFFIX_BEAN_QUERY_DATE_START;
     public static String SUFFIX_BEAN_QUERY_DATE_END;
+
     public static String SUFFIX_MAPPER;
+    public static String SUFFIX_SERVICE;
+    public static String SUFFIX_SERVICE_IMPL;
+    public static String SUFFIX_CONTROLLER;
 
     public static String PACKAGE_MAPPERS;
     public static String PATH_MAPPERS;
     public static String PACKAGE_MAPPERS_XML;
     public static String PATH_MAPPERS_XML;
+
+    public static String PACKAGE_VO;
+    public static String PATH_VO;
+
+    public static String PACKAGE_SERVICE;
+    public static String PATH_SERVICE;
+    public static String PACKAGE_SERVICES_IMPL;
+    public static String PATH_SERVICES_IMPL;
+
+    public static String PACKAGE_CONTROLLER;
+    public static String PATH_CONTROLLER;
 
 
     static {
@@ -99,6 +114,12 @@ public class Constants {
         PACKAGE_ENUMS = PACKAGE_BASE + "." + PropertiesUtils.getProperty("package.enums");
         PACKAGE_MAPPERS = PACKAGE_BASE + "." + PropertiesUtils.getProperty("package.mappers");
         PACKAGE_MAPPERS_XML = PACKAGE_MAPPERS;
+        PACKAGE_PO = PACKAGE_BASE + "." + PropertiesUtils.getProperty("package.po");
+        PACKAGE_VO = PACKAGE_BASE + "." + PropertiesUtils.getProperty("package.vo");
+        PACKAGE_SERVICE = PACKAGE_BASE + "." + PropertiesUtils.getProperty("package.service");
+        PACKAGE_SERVICES_IMPL = PACKAGE_BASE + "." + PropertiesUtils.getProperty("package.service.impl");
+        PACKAGE_CONTROLLER = PACKAGE_BASE + "." + PropertiesUtils.getProperty("package.controller");
+
 
         PATH_BASE = PropertiesUtils.getProperty("path.base") + "java/" + PACKAGE_BASE.replace(".", "/");
         PATH_PO = PropertiesUtils.getProperty("path.base") + "java/" + PACKAGE_PO.replace(".", "/");
@@ -107,6 +128,10 @@ public class Constants {
         PATH_ENUMS = PropertiesUtils.getProperty("path.base") + "java/" + PACKAGE_ENUMS.replace(".", "/");
         PATH_MAPPERS = PropertiesUtils.getProperty("path.base") + "java/" + PACKAGE_MAPPERS.replace(".", "/");
         PATH_MAPPERS_XML = PropertiesUtils.getProperty("path.base") + "resources/" + PACKAGE_MAPPERS_XML.replace(".", "/");
+        PATH_VO = PropertiesUtils.getProperty("path.base") + "java/" + PACKAGE_VO.replace(".", "/");
+        PATH_SERVICE = PropertiesUtils.getProperty("path.base") + "java/" + PACKAGE_SERVICE.replace(".", "/");
+        PATH_SERVICES_IMPL = PropertiesUtils.getProperty("path.base") + "java/" + PACKAGE_SERVICES_IMPL.replace(".", "/");
+        PATH_CONTROLLER = PropertiesUtils.getProperty("path.base") + "java/" + PACKAGE_CONTROLLER.replace(".", "/");
 
         AUTHOR_COMMENT = PropertiesUtils.getProperty("author.comment");
 
@@ -122,7 +147,11 @@ public class Constants {
         SUFFIX_BEAN_QUERY_FUZZY = PropertiesUtils.getProperty("suffix.bean.query.fuzzy");
         SUFFIX_BEAN_QUERY_DATE_START = PropertiesUtils.getProperty("suffix.bean.query.date.start");
         SUFFIX_BEAN_QUERY_DATE_END = PropertiesUtils.getProperty("suffix.bean.query.date.end");
+
         SUFFIX_MAPPER = PropertiesUtils.getProperty("suffix.mapper");
+        SUFFIX_SERVICE = PropertiesUtils.getProperty("suffix.service");
+        SUFFIX_SERVICE_IMPL = PropertiesUtils.getProperty("suffix.service.impl");
+        SUFFIX_CONTROLLER = PropertiesUtils.getProperty("suffix.controller");
 
     }
 

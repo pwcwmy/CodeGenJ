@@ -63,10 +63,10 @@ public class BuildMapper {
                 // 更新多传一个Bean xml中bean是小写
                 // @Param("bean") T t
                 BuildComment.createMethodComment(bw, "根据" + methodName + "更新");
-                bw.write("\t Integer updateBy" + methodName + " (@Param(\"bean\") T t, " + paramName + ");\n\n");
+                bw.write("\t Long updateBy" + methodName + " (@Param(\"bean\") T t, " + paramName + ");\n\n");
 
                 BuildComment.createMethodComment(bw, "根据" + methodName + "删除");
-                bw.write("\t Integer deleteBy" + methodName + " (" + paramName + ");\n\n");
+                bw.write("\t Long deleteBy" + methodName + " (" + paramName + ");\n\n");
             }
             // 最后一个} 类闭合
             bw.write("}");

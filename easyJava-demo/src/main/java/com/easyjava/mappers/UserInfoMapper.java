@@ -16,12 +16,12 @@ public interface UserInfoMapper<T, P> extends BaseMapper {
 	/**
 	 * 根据UserId更新
 	 */
-	 Integer updateByUserId (@Param("bean") T t, @Param("userId") String userId);
+	 Long updateByUserId (@Param("bean") T t, @Param("userId") String userId);
 
 	/**
 	 * 根据UserId删除
 	 */
-	 Integer deleteByUserId (@Param("userId") String userId);
+	 Long deleteByUserId (@Param("userId") String userId);
 
 	/**
 	 * 根据Email查询
@@ -31,12 +31,12 @@ public interface UserInfoMapper<T, P> extends BaseMapper {
 	/**
 	 * 根据Email更新
 	 */
-	 Integer updateByEmail (@Param("bean") T t, @Param("email") String email);
+	 Long updateByEmail (@Param("bean") T t, @Param("email") String email);
 
 	/**
 	 * 根据Email删除
 	 */
-	 Integer deleteByEmail (@Param("email") String email);
+	 Long deleteByEmail (@Param("email") String email);
 
 	/**
 	 * 根据Nickname查询
@@ -46,11 +46,11 @@ public interface UserInfoMapper<T, P> extends BaseMapper {
 	/**
 	 * 根据Nickname更新
 	 */
-	 Integer updateByNickname (@Param("bean") T t, @Param("nickname") String nickname);
+	 Long updateByNickname (@Param("bean") T t, @Param("nickname") String nickname);
 
 	/**
 	 * 根据Nickname删除
 	 */
-	 Integer deleteByNickname (@Param("nickname") String nickname);
+	 Long deleteByNickname (@Param("nickname") String nickname);
 
 }

@@ -5,25 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d75983f5-cd0e-4562-9851-a2bf2def51cf" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/easyJava-demo/src/main/resources/com/easyjava/mappers/UserInfoMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/builder/BuildMapperXml.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easyJava-demo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava-demo/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easyJava-demo/src/main/java/com/easyjava/RunDemoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava-demo/src/main/java/com/easyjava/RunDemoApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/easyJava-demo/src/main/java/com/easyjava/entity/po/UserInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava-demo/src/main/java/com/easyjava/entity/po/UserInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyJava-demo/src/main/java/com/easyjava/entity/query/SimplePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava-demo/src/main/java/com/easyjava/entity/query/SimplePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/easyJava-demo/src/main/java/com/easyjava/entity/query/UserInfoQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava-demo/src/main/java/com/easyjava/entity/query/UserInfoQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easyJava-demo/src/main/java/com/easyjava/mappers/BaseMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava-demo/src/main/java/com/easyjava/mappers/BaseMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyJava-demo/src/main/java/com/easyjava/enums/DateTimePatternEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyJava-demo/src/main/java/com/easyjava/enums/PageSizeEnum.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/easyJava-demo/src/main/java/com/easyjava/mappers/UserInfoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava-demo/src/main/java/com/easyjava/mappers/UserInfoMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easyJava-demo/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava-demo/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/RunApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/RunApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/bean/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/bean/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/bean/TableInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/bean/TableInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/builder/BuildBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/builder/BuildBase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/builder/BuildMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/builder/BuildMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/builder/BuildQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/builder/BuildQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/builder/BuildTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/builder/BuildTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easyJava/src/main/resources/template/BaseMapper.txt" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava/src/main/resources/template/BaseMapper.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyJava/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyJava/src/main/resources/template/DateTimePatternEnum.txt" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava/src/main/resources/template/DateTimePatternEnum.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easyJava/src/main/resources/template/SimplePage.txt" beforeDir="false" afterPath="$PROJECT_DIR$/easyJava/src/main/resources/template/SimplePage.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +91,7 @@
       <recent name="com.easyjava.builder" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.MapperTest">
+  <component name="RunManager" selected="应用程序.RunApplication">
     <configuration name="RunApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.easyjava.RunApplication" />
       <module name="easyJava" />
@@ -151,8 +146,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.MapperTest" />
         <item itemvalue="应用程序.RunApplication" />
+        <item itemvalue="JUnit.MapperTest" />
         <item itemvalue="JUnit.MapperTest.insertBatch" />
         <item itemvalue="JUnit.MapperTest.insertorUpdate" />
         <item itemvalue="JUnit.MapperTest.insert" />
@@ -180,7 +175,7 @@
       <workItem from="1738255738110" duration="369000" />
       <workItem from="1738256112947" duration="244000" />
       <workItem from="1738290781287" duration="1582000" />
-      <workItem from="1738293750372" duration="106886000" />
+      <workItem from="1738293750372" duration="115095000" />
     </task>
     <servers />
   </component>
@@ -192,7 +187,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-field">
           <url>file://$PROJECT_DIR$/easyJava/src/main/java/com/easyjava/bean/Constants.java</url>
-          <line>83</line>
+          <line>84</line>
           <properties field="SUFFIX_MAPPER" class="com.easyjava.bean.Constants" />
           <option name="timeStamp" value="4" />
         </line-breakpoint>

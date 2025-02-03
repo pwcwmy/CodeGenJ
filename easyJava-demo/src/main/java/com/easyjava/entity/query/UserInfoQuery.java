@@ -3,7 +3,7 @@ package com.easyjava.entity.query;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
-import com.easyjava.enums.DateTimePatternEnum;
+import com.easyjava.entity.enums.DateTimePatternEnum;
 import com.easyjava.utils.DateUtils;
 
 /**
