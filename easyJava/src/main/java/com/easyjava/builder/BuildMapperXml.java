@@ -464,10 +464,10 @@ public class BuildMapperXml {
         bw.write("\t\tFROM " + tableInfo.getTableName() + " \n");
         bw.write("\t\t<include refid=\"" + QUERY_CONDITION + "\"/>\n");
         bw.write("\t\t<if test=\"query.orderBy != null\">\n");
-        bw.write("\t\torder by ${query.orderBy}\"\n");
+        bw.write("\t\torder by ${query.orderBy}\n");
         bw.write("\t\t</if>\n");
         bw.write("\t\t<if test=\"query.simplePage != null\">\n");
-        bw.write("\t\tlimit #{query.simplePage.start}, #{query.simplePage.end}\"\n");
+        bw.write("\t\tlimit #{query.simplePage.start}, #{query.simplePage.end}\n");
         bw.write("\t\t</if>\n");
         bw.write("\t</select>\n\n");
     }
@@ -508,9 +508,9 @@ public class BuildMapperXml {
                 // <![CDATA[ and join_time >= str_to_date(#query.joinTimeStart), '%Y-%m-%d']]>
                 // <![CDATA[ and join_time < date_sub(str_to_date(#query.joinTimeStart), '%Y-%m-%d'), interval -1 day)]]>
                 if (fieldInfo.getPropertyName().endsWith(Constants.SUFFIX_BEAN_QUERY_DATE_START)) {
-                    andWhere = "<![CDATA[ and " + fieldInfo.getFieldName() + " >= str_to_date(#query." + fieldInfo.getPropertyName() + "), '%Y-%m-%d']]>";
+                    andWhere = "<![CDATA[ and " + fieldInfo.getFieldName() + " >= str_to_date(#{query." + fieldInfo.getPropertyName() + "}, '%Y-%m-%d')]]>";
                 } else if (fieldInfo.getPropertyName().endsWith(Constants.SUFFIX_BEAN_QUERY_DATE_END)) {
-                    andWhere = "<![CDATA[ and " + fieldInfo.getFieldName() + " < date_sub(str_to_date(#query." + fieldInfo.getPropertyName() + "), '%Y-%m-%d'), interval -1 day)]]>";
+                    andWhere = "<![CDATA[ and " + fieldInfo.getFieldName() + " < date_sub(str_to_date(#{query." + fieldInfo.getPropertyName() + "}, '%Y-%m-%d'), interval -1 day)]]>";
                 }
 
             }
@@ -535,7 +535,7 @@ public class BuildMapperXml {
             }
             // 普通的只要判断null， String要多判断一个空串
             bw.write("\t\t<if test=\"query." + fieldInfo.getPropertyName() + " != null" + stringQuery +"\">\n");
-            bw.write("\t\t\tand id = #{query." + fieldInfo.getPropertyName() + "}\n");
+            bw.write("\t\t\tand " + fieldInfo.getFieldName() + " = #{query." + fieldInfo.getPropertyName() + "}\n");
             bw.write("\t\t</if>\n");
         }
         bw.write("\t</sql>\n\n");

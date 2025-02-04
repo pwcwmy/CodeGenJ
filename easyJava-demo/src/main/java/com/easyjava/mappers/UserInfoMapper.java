@@ -2,16 +2,18 @@ package com.easyjava.mappers;
 
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * @Description: 用户信息Mapper
  * @author: peter
- * @Date: 2025/02/34
+ * @Date: 2025/02/35
  */
-public interface UserInfoMapper<T, P> extends BaseMapper {
+public interface UserInfoMapper<T, P> extends BaseMapper<T, P> {
 	/**
 	 * 根据UserId查询
 	 */
-	 T selectByUserId (@Param("userId") String userId);
+	 List<T> selectByUserId (@Param("userId") String userId);
 
 	/**
 	 * 根据UserId更新
@@ -26,7 +28,7 @@ public interface UserInfoMapper<T, P> extends BaseMapper {
 	/**
 	 * 根据Email查询
 	 */
-	 T selectByEmail (@Param("email") String email);
+	 List<T> selectByEmail (@Param("email") String email);
 
 	/**
 	 * 根据Email更新
@@ -41,7 +43,7 @@ public interface UserInfoMapper<T, P> extends BaseMapper {
 	/**
 	 * 根据Nickname查询
 	 */
-	 T selectByNickname (@Param("nickname") String nickname);
+	 List<T> selectByNickname (@Param("nickname") String nickname);
 
 	/**
 	 * 根据Nickname更新

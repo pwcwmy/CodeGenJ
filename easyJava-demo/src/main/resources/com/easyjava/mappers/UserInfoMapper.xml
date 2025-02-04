@@ -46,52 +46,52 @@
 	<!--基础查询条件-->
 	<sql id="base_query_condition">
 		<if test="query.userId != null and query.userId != ''">
-			and id = #{query.userId}
+			and user_id = #{query.userId}
 		</if>
 		<if test="query.nickname != null and query.nickname != ''">
-			and id = #{query.nickname}
+			and nickname = #{query.nickname}
 		</if>
 		<if test="query.email != null and query.email != ''">
-			and id = #{query.email}
+			and email = #{query.email}
 		</if>
 		<if test="query.password != null and query.password != ''">
-			and id = #{query.password}
+			and password = #{query.password}
 		</if>
 		<if test="query.sex != null">
-			and id = #{query.sex}
+			and sex = #{query.sex}
 		</if>
 		<if test="query.birthday != null and query.birthday != ''">
-			and id = #{query.birthday}
+			and birthday = #{query.birthday}
 		</if>
 		<if test="query.school != null and query.school != ''">
-			and id = #{query.school}
+			and school = #{query.school}
 		</if>
 		<if test="query.personIntroduction != null and query.personIntroduction != ''">
-			and id = #{query.personIntroduction}
+			and person_introduction = #{query.personIntroduction}
 		</if>
 		<if test="query.joinTime != null">
-			and id = #{query.joinTime}
+			and join_time = #{query.joinTime}
 		</if>
 		<if test="query.lastLoginTime != null">
-			and id = #{query.lastLoginTime}
+			and last_login_time = #{query.lastLoginTime}
 		</if>
 		<if test="query.lastLoginIp != null and query.lastLoginIp != ''">
-			and id = #{query.lastLoginIp}
+			and last_login_ip = #{query.lastLoginIp}
 		</if>
 		<if test="query.status != null">
-			and id = #{query.status}
+			and status = #{query.status}
 		</if>
 		<if test="query.noticeInfo != null and query.noticeInfo != ''">
-			and id = #{query.noticeInfo}
+			and notice_info = #{query.noticeInfo}
 		</if>
 		<if test="query.totalCoinCount != null">
-			and id = #{query.totalCoinCount}
+			and total_coin_count = #{query.totalCoinCount}
 		</if>
 		<if test="query.currentCoinCount != null">
-			and id = #{query.currentCoinCount}
+			and current_coin_count = #{query.currentCoinCount}
 		</if>
 		<if test="query.theme != null">
-			and id = #{query.theme}
+			and theme = #{query.theme}
 		</if>
 	</sql>
 
@@ -119,16 +119,16 @@
 			and person_introduction like concat('%', #{query.personIntroductionFuzzy}, '%')
 		</if>
 		<if test="query.joinTimeStart != null and query.joinTimeStart != ''">
-			<![CDATA[ and join_time >= str_to_date(#query.joinTimeStart), '%Y-%m-%d']]>
+			<![CDATA[ and join_time >= str_to_date(#{query.joinTimeStart}, '%Y-%m-%d')]]>
 		</if>
 		<if test="query.joinTimeEnd != null and query.joinTimeEnd != ''">
-			<![CDATA[ and join_time < date_sub(str_to_date(#query.joinTimeEnd), '%Y-%m-%d'), interval -1 day)]]>
+			<![CDATA[ and join_time < date_sub(str_to_date(#{query.joinTimeEnd}, '%Y-%m-%d'), interval -1 day)]]>
 		</if>
 		<if test="query.lastLoginTimeStart != null and query.lastLoginTimeStart != ''">
-			<![CDATA[ and last_login_time >= str_to_date(#query.lastLoginTimeStart), '%Y-%m-%d']]>
+			<![CDATA[ and last_login_time >= str_to_date(#{query.lastLoginTimeStart}, '%Y-%m-%d')]]>
 		</if>
 		<if test="query.lastLoginTimeEnd != null and query.lastLoginTimeEnd != ''">
-			<![CDATA[ and last_login_time < date_sub(str_to_date(#query.lastLoginTimeEnd), '%Y-%m-%d'), interval -1 day)]]>
+			<![CDATA[ and last_login_time < date_sub(str_to_date(#{query.lastLoginTimeEnd}, '%Y-%m-%d'), interval -1 day)]]>
 		</if>
 		<if test="query.lastLoginIpFuzzy != null and query.lastLoginIpFuzzy != ''">
 			and last_login_ip like concat('%', #{query.lastLoginIpFuzzy}, '%')
@@ -153,10 +153,10 @@
 		FROM user_info 
 		<include refid="query_condition"/>
 		<if test="query.orderBy != null">
-		order by ${query.orderBy}"
+		order by ${query.orderBy}
 		</if>
 		<if test="query.simplePage != null">
-		limit #{query.simplePage.start}, #{query.simplePage.end}"
+		limit #{query.simplePage.start}, #{query.simplePage.end}
 		</if>
 	</select>
 

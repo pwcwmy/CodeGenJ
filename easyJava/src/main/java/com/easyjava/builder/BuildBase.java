@@ -53,6 +53,44 @@ public class BuildBase {
         // 生成ResponseVO
         build(headerInfoList, "ResponseVO", Constants.PATH_VO);
         headerInfoList.clear();
+
+        // 生成BusinessException
+        headerInfoList.add("package " + Constants.PACKAGE_EXCEPTION + ";");
+        // import com.easyjava.entity.enums.ResponseCodeEnum;
+        headerInfoList.add("import " + Constants.PACKAGE_ENUMS + ".ResponseCodeEnum;\n");
+        build(headerInfoList, "BusinessException", Constants.PATH_EXCEPTION);
+        headerInfoList.clear();
+
+        // 生成ResponseCodeEnum
+        headerInfoList.add("package " + Constants.PACKAGE_ENUMS + ";");
+        build(headerInfoList, "ResponseCodeEnum", Constants.PATH_ENUMS);
+        headerInfoList.clear();
+
+        // 生成AGlobalExceptionHandlerController
+        // package com.easyjava.controller;
+        //
+        //import com.easyjava.entity.enums.ResponseCodeEnum;
+        //import com.easyjava.entity.vo.ResponseVO;
+        //import com.easyjava.exception.BusinessException;
+        headerInfoList.add("package " + Constants.PACKAGE_CONTROLLER + ";\n\n");
+        headerInfoList.add("import " + Constants.PACKAGE_ENUMS + ".ResponseCodeEnum;\n");
+        headerInfoList.add("import " + Constants.PACKAGE_VO + ".ResponseVO;\n");
+        headerInfoList.add("import " + Constants.PACKAGE_EXCEPTION + ".BusinessException;\n");
+        build(headerInfoList, "AGlobalExceptionHandlerController", Constants.PATH_CONTROLLER);
+        headerInfoList.clear();
+
+        // 生成ABaseController
+        // package com.easyjava.controller;
+        //
+        //import com.easyjava.entity.enums.ResponseCodeEnum;
+        //import com.easyjava.entity.vo.ResponseVO;
+        headerInfoList.add("package " + Constants.PACKAGE_CONTROLLER + ";\n\n");
+        headerInfoList.add("import " + Constants.PACKAGE_ENUMS + ".ResponseCodeEnum;\n");
+        headerInfoList.add("import " + Constants.PACKAGE_VO + ".ResponseVO;\n");
+        build(headerInfoList, "ABaseController", Constants.PATH_CONTROLLER);
+        headerInfoList.clear();
+
+
     }
 
     private static void build(List<String> headerInfoList, String fileName, String outputPath) {

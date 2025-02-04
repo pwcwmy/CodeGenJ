@@ -1,12 +1,12 @@
 public enum PageSizeEnum {
     SIZE20(20);
-    private Integer pageSize;
+    private long pageSize;
 
-    public Integer getPageSize() {
+    public long getPageSize() {
         return pageSize;
     }
 
-    PageSizeEnum(Integer pageSize) {
+    PageSizeEnum(long pageSize) {
         this.pageSize = pageSize;
     }
 }

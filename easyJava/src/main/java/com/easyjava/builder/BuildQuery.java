@@ -137,7 +137,7 @@ public class BuildQuery {
     private static void buildGetAndSet(List<FieldInfo> fieldInfoList, BufferedWriter bw) throws IOException {
         for (FieldInfo fieldInfo : fieldInfoList) {
             // 对特殊的Boolean is_deleted getDeleted setDeleted
-            // TODO: 处于JavaBean规范，这里的特殊处理会影响XMl的解析，如何权衡
+            // TODO: 为了JavaBean规范，这里的特殊处理会影响XMl的解析，如何权衡
 //            if (null != fieldInfo.getFieldName() && fieldInfo.getFieldName().startsWith("is_")) { // 数据库没有bool，所以这里不判断bool
 //                bw.write("\tpublic " + fieldInfo.getJavaType() + " get" + fieldInfo.getPropertyName().substring(2) + "() {\n");
 //                bw.write("\t\treturn this." + fieldInfo.getPropertyName() + ";\n");

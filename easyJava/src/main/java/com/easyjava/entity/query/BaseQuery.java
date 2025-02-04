@@ -1,6 +1,6 @@
 package com.easyjava.entity.query;
 
-public class BaseParam {
+public class BaseQuery {
     private SimplePage simplePage;
 
     private Integer pageNo;

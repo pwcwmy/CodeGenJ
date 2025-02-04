@@ -9,7 +9,7 @@ import com.easyjava.utils.DateUtils;
 /**
  * @Description: 用户信息查询对象
  * @author: peter
- * @Date: 2025/02/34
+ * @Date: 2025/02/35
  */
 public class UserInfoQuery extends BaseQuery {
 	/**

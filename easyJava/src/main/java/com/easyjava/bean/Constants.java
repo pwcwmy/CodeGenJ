@@ -103,6 +103,9 @@ public class Constants {
     public static String PACKAGE_CONTROLLER;
     public static String PATH_CONTROLLER;
 
+    public static String PACKAGE_EXCEPTION;
+    public static String PATH_EXCEPTION;
+
 
     static {
         IGNORE_TABLE_PREFIX = Boolean.valueOf(PropertiesUtils.getProperty("ignore.table.prefix"));
@@ -119,6 +122,7 @@ public class Constants {
         PACKAGE_SERVICE = PACKAGE_BASE + "." + PropertiesUtils.getProperty("package.service");
         PACKAGE_SERVICES_IMPL = PACKAGE_BASE + "." + PropertiesUtils.getProperty("package.service.impl");
         PACKAGE_CONTROLLER = PACKAGE_BASE + "." + PropertiesUtils.getProperty("package.controller");
+        PACKAGE_EXCEPTION = PACKAGE_BASE + "." + PropertiesUtils.getProperty("package.exception");
 
 
         PATH_BASE = PropertiesUtils.getProperty("path.base") + "java/" + PACKAGE_BASE.replace(".", "/");
@@ -132,6 +136,7 @@ public class Constants {
         PATH_SERVICE = PropertiesUtils.getProperty("path.base") + "java/" + PACKAGE_SERVICE.replace(".", "/");
         PATH_SERVICES_IMPL = PropertiesUtils.getProperty("path.base") + "java/" + PACKAGE_SERVICES_IMPL.replace(".", "/");
         PATH_CONTROLLER = PropertiesUtils.getProperty("path.base") + "java/" + PACKAGE_CONTROLLER.replace(".", "/");
+        PATH_EXCEPTION = PropertiesUtils.getProperty("path.base") + "java/" + PACKAGE_EXCEPTION.replace(".", "/");
 
         AUTHOR_COMMENT = PropertiesUtils.getProperty("author.comment");
 

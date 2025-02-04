@@ -9,7 +9,7 @@ import com.easyjava.entity.vo.PaginationResultVO;
 /**
  * @Description: 用户信息Service
  * @author: peter
- * @Date: 2025/02/34
+ * @Date: 2025/02/35
  */
 public interface UserInfoService {
 	/**
@@ -30,17 +30,17 @@ public interface UserInfoService {
 	/**
 	 * 新增
 	 */
-	Long insert(UserInfo userInfo);
+	Long insert(UserInfo bean);
 
 	/**
 	 * 批量新增
 	 */
-	Long insertBatch(UserInfo userInfo);
+	Long insertBatch(List<UserInfo> list);
 
 	/**
 	 * 批量新增或修改
 	 */
-	Long insertOrUpdateBatch(UserInfo userInfo);
+	Long insertOrUpdateBatch(List<UserInfo> list);
 
 	/**
 	 * 根据UserId查询
@@ -50,7 +50,7 @@ public interface UserInfoService {
 	/**
 	 * 根据UserId更新
 	 */
-	 Long updateByUserId (UserInfo userInfo, String userId);
+	 Long updateByUserId (UserInfo bean, String userId);
 
 	/**
 	 * 根据UserId删除
@@ -65,7 +65,7 @@ public interface UserInfoService {
 	/**
 	 * 根据Email更新
 	 */
-	 Long updateByEmail (UserInfo userInfo, String email);
+	 Long updateByEmail (UserInfo bean, String email);
 
 	/**
 	 * 根据Email删除
@@ -80,7 +80,7 @@ public interface UserInfoService {
 	/**
 	 * 根据Nickname更新
 	 */
-	 Long updateByNickname (UserInfo userInfo, String nickname);
+	 Long updateByNickname (UserInfo bean, String nickname);
 
 	/**
 	 * 根据Nickname删除

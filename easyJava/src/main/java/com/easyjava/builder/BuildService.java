@@ -36,6 +36,7 @@ public class BuildService {
             bw.write("import java.util.List;\n\n");
 
             String returnListName = "List<" + beanName+ ">";
+            String parameterListName = "List<" + beanName + ">";
             String returnPaginationResultVOName = "PaginationResultVO<" + beanName + ">";
             String beanQueryName = beanName + Constants.SUFFIX_BEAN_QUERY;
 
@@ -49,9 +50,6 @@ public class BuildService {
             BuildComment.createClassComment(bw, tableInfo.getComment() + Constants.SUFFIX_SERVICE);
             bw.write("public interface " + className + " {\n");
 
-
-
-
             // /**
             //	 * 根据条件查询列表
             //	 */
@@ -60,7 +58,7 @@ public class BuildService {
             bw.write("\t" + returnListName + " selectListByParam(" + beanQueryName + " query);\n\n");
 
             //	/**
-            //	 * 根据条件查询列表
+            //	 * 根据条件查询数量
             //	 */
             //	List<UserInfo> findCountByParam(UserInfoQuery query);
             BuildComment.createMethodComment(bw, "根据条件查询数量");
@@ -77,22 +75,23 @@ public class BuildService {
             //     * 新增
             //     */
             //    Long insert(UserInfo userInfo);
+            String BEAN = "bean";
             BuildComment.createMethodComment(bw, "新增");
-            bw.write("\tLong insert(" + beanName + " " + lowerFirstBeanName + ");\n\n");
+            bw.write("\tLong insert(" + beanName + " " + BEAN + ");\n\n");
 
             //    /**
             //     * 批量新增
             //     */
             //    Long insertBatch(UserInfo userInfo);
             BuildComment.createMethodComment(bw, "批量新增");
-            bw.write("\tLong insertBatch(" + beanName + " " + lowerFirstBeanName + ");\n\n");
+            bw.write("\tLong insertBatch(" + parameterListName +  " list);\n\n");
 
             //    /**
             //     * 批量新增或修改
             //     */
             //    Long insertOrUpdateBatch(UserInfo userInfo);
             BuildComment.createMethodComment(bw, "批量新增或修改");
-            bw.write("\tLong insertOrUpdateBatch(" + beanName + " " + lowerFirstBeanName + ");\n\n");
+            bw.write("\tLong insertOrUpdateBatch(" + parameterListName +  " list);\n\n");
 
             // 先用唯一索引
             Map<String, List<FieldInfo>> keyIndexMap = tableInfo.getKeyIndexMap();
@@ -123,7 +122,7 @@ public class BuildService {
                 // 更新多传一个Bean xml中bean是小写
                 // @Param("bean") T t
                 BuildComment.createMethodComment(bw, "根据" + methodName + "更新");
-                bw.write("\t Long updateBy" + methodName + " (" + beanName + " " + lowerFirstBeanName +", " + paramName + ");\n\n");
+                bw.write("\t Long updateBy" + methodName + " (" + beanName + " " + BEAN +", " + paramName + ");\n\n");
 
                 BuildComment.createMethodComment(bw, "根据" + methodName + "删除");
                 bw.write("\t Long deleteBy" + methodName + " (" + paramName + ");\n\n");

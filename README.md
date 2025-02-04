@@ -450,3 +450,13 @@ public class SimplePage {
 - **优先使用 `long`**：适用于所有分页参数，避免溢出风险。
 - **仅在需要 `null` 时使用 `Long`**：如外部参数可能未传值。
 - **修正逻辑错误**：确保分页计算正确，尤其是 `totalPage` 和 `pageNo` 的范围限制。
+
+
+API响应设计
+- `code`：表示HTTP状态码或自定义业务状态码。
+
+- `status`：状态类型（如“success”、“error”）。
+
+- `message`：给开发者的详细错误信息或成功提示。
+
+- `data`：实际返回的数据内容。

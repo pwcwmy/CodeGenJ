@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 /**
  * @Description: 用户信息ServiceImpl
  * @author: peter
- * @Date: 2025/02/34
+ * @Date: 2025/02/35
  */
 @Service("UserInfoService")
 public class UserInfoServiceImpl implements UserInfoService {
@@ -46,30 +46,40 @@ public class UserInfoServiceImpl implements UserInfoService {
 		long totalCount = this.selectCountByParam(query);
 		long pageSize = query.getPageSize() == null ? PageSizeEnum.SIZE20.getPageSize() : query.getPageSize();
 		long pageNo = query.getPageNo() == null ? 1 : query.getPageNo();
-
-		SimplePage simplePage = new SimplePage(pageNo, totalCount, pageSize);
-
+		SimplePage simplePage = new SimplePage(pageNo, pageSize, totalCount);
+		query.setSimplePage(simplePage);
+		List<UserInfo> list = this.userInfoMapper.selectList(query);
+		return new PaginationResultVO<>(totalCount, simplePage.getPageSize(), simplePage.getPageNo(), simplePage.getTotalPage(), list);
 	}
 
 	/**
 	 * 新增
 	 */
 	@Override
-	public Long insert(UserInfo userInfo) {
+	public Long insert(UserInfo bean) {
+		return this.userInfoMapper.insert(bean);
 	}
 
 	/**
 	 * 批量新增
 	 */
 	@Override
-	public Long insertBatch(UserInfo userInfo) {
+	public Long insertBatch(List<UserInfo> list) {
+		if (list == null || list.isEmpty()) {
+			return 0L;
+		}
+		return this.userInfoMapper.insertBatch(list);
 	}
 
 	/**
 	 * 批量新增或修改
 	 */
 	@Override
-	public Long insertOrUpdateBatch(UserInfo userInfo) {
+	public Long insertOrUpdateBatch(List<UserInfo> list) {
+		if (list == null || list.isEmpty()) {
+			return 0L;
+		}
+		return this.userInfoMapper.insertOrUpdateBatch(list);
 	}
 
 	/**
@@ -77,13 +87,15 @@ public class UserInfoServiceImpl implements UserInfoService {
 	 */
 	@Override
 	public  List<UserInfo> selectByUserId (String userId) {
+		return this.userInfoMapper.selectByUserId(userId);
 	}
 
 	/**
 	 * 根据UserId更新
 	 */
 	@Override
-	public  Long updateByUserId (UserInfo userInfo, String userId) {
+	public  Long updateByUserId (UserInfo bean, String userId) {
+		return this.userInfoMapper.updateByUserId(bean, userId);
 	}
 
 	/**
@@ -91,6 +103,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	 */
 	@Override
 	public  Long deleteByUserId (String userId) {
+		return this.userInfoMapper.deleteByUserId(userId);
 	}
 
 	/**
@@ -98,13 +111,15 @@ public class UserInfoServiceImpl implements UserInfoService {
 	 */
 	@Override
 	public  List<UserInfo> selectByEmail (String email) {
+		return this.userInfoMapper.selectByEmail(email);
 	}
 
 	/**
 	 * 根据Email更新
 	 */
 	@Override
-	public  Long updateByEmail (UserInfo userInfo, String email) {
+	public  Long updateByEmail (UserInfo bean, String email) {
+		return this.userInfoMapper.updateByEmail(bean, email);
 	}
 
 	/**
@@ -112,6 +127,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	 */
 	@Override
 	public  Long deleteByEmail (String email) {
+		return this.userInfoMapper.deleteByEmail(email);
 	}
 
 	/**
@@ -119,13 +135,15 @@ public class UserInfoServiceImpl implements UserInfoService {
 	 */
 	@Override
 	public  List<UserInfo> selectByNickname (String nickname) {
+		return this.userInfoMapper.selectByNickname(nickname);
 	}
 
 	/**
 	 * 根据Nickname更新
 	 */
 	@Override
-	public  Long updateByNickname (UserInfo userInfo, String nickname) {
+	public  Long updateByNickname (UserInfo bean, String nickname) {
+		return this.userInfoMapper.updateByNickname(bean, nickname);
 	}
 
 	/**
@@ -133,6 +151,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	 */
 	@Override
 	public  Long deleteByNickname (String nickname) {
+		return this.userInfoMapper.deleteByNickname(nickname);
 	}
 
 }

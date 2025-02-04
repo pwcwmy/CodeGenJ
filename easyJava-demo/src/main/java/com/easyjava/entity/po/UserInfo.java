@@ -11,13 +11,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  * @Description: 用户信息
  * @author: peter
- * @Date: 2025/02/34
+ * @Date: 2025/02/35
  */
 public class UserInfo implements Serializable {
 	/**
 	 * 用户id
 	 */
-	@JsonIgnore
 	private String userId;
 
 	/**
@@ -33,6 +32,7 @@ public class UserInfo implements Serializable {
 	/**
 	 * 密码
 	 */
+	@JsonIgnore
 	private String password;
 
 	/**

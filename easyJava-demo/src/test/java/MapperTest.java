@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 @SpringBootTest(classes = RunDemoApplication.class)
 @RunWith(SpringRunner.class)
@@ -104,7 +105,7 @@ public class MapperTest {
         System.out.println(userInfoMapper.selectByNickname("222"));
     }*/
 
-    @Test
+   /* @Test
     @Order(1)
     public void updateByUserId() {
         UserInfo userInfo = new UserInfo();
@@ -144,6 +145,19 @@ public class MapperTest {
     @Order(6)
     public void deleteByNickname() {
         System.out.println(userInfoMapper.deleteByNickname("222"));
+    }
+*/
+    @Test
+    public void insert() {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUserId("899");
+        userInfo.setNickname("899");
+        userInfo.setPassword("22");
+        userInfo.setEmail("222899");
+        userInfo.setJoinTime(new Date());
+        userInfo.setTotalCoinCount(10);
+        userInfo.setCurrentCoinCount(10);
+        System.out.println(userInfoMapper.insert(userInfo));
     }
 
 }

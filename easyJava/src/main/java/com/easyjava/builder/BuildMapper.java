@@ -31,8 +31,9 @@ public class BuildMapper {
             bw = new BufferedWriter(osw);
             bw.write("package " + Constants.PACKAGE_MAPPERS + ";\n\n");
             bw.write("import org.apache.ibatis.annotations.Param;\n\n");
+            bw.write("import java.util.List;\n\n");
             BuildComment.createClassComment(bw, tableInfo.getComment() + "Mapper");
-            bw.write("public interface " + className + "<T, P> extends BaseMapper {\n");
+            bw.write("public interface " + className + "<T, P> extends BaseMapper<T, P> {\n");
 
             // 先用唯一索引
             Map<String, List<FieldInfo>> keyIndexMap = tableInfo.getKeyIndexMap();
@@ -58,7 +59,7 @@ public class BuildMapper {
                     }
                 }
                 BuildComment.createMethodComment(bw, "根据" + methodName + "查询");
-                bw.write("\t T selectBy" + methodName + " (" + paramName + ");\n\n");
+                bw.write("\t List<T> selectBy" + methodName + " (" + paramName + ");\n\n");
 
                 // 更新多传一个Bean xml中bean是小写
                 // @Param("bean") T t

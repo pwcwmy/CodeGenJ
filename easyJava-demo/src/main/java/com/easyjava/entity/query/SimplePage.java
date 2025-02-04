@@ -35,6 +35,8 @@ public class SimplePage {
         // 计算起始位置
         this.start = (this.pageNo - 1) * this.pageSize;
         this.end = this.pageSize;
+
+        System.out.println(this.toString());
     }
 
     public long getPageNo() {
@@ -83,5 +85,17 @@ public class SimplePage {
 
     public void setEnd(long end) {
         this.end = end;
+    }
+
+    @Override
+    public String toString() {
+        return "SimplePage{" +
+                "pageNo=" + pageNo +
+                ", pageSize=" + pageSize +
+                ", totalCount=" + totalCount +
+                ", totalPage=" + totalPage +
+                ", start=" + start +
+                ", end=" + end +
+                '}';
     }
 }
