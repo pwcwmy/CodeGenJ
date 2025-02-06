@@ -9,7 +9,7 @@ import com.easyjava.entity.vo.PaginationResultVO;
 /**
  * @Description: 用户信息Service
  * @author: peter
- * @Date: 2025/02/35
+ * @Date: 2025/02/37
  */
 public interface UserInfoService {
 	/**
@@ -45,7 +45,7 @@ public interface UserInfoService {
 	/**
 	 * 根据UserId查询
 	 */
-	 List<UserInfo> selectByUserId (String userId);
+	 UserInfo selectByUserId (String userId);
 
 	/**
 	 * 根据UserId更新
@@ -60,7 +60,7 @@ public interface UserInfoService {
 	/**
 	 * 根据Email查询
 	 */
-	 List<UserInfo> selectByEmail (String email);
+	 UserInfo selectByEmail (String email);
 
 	/**
 	 * 根据Email更新
@@ -75,7 +75,7 @@ public interface UserInfoService {
 	/**
 	 * 根据Nickname查询
 	 */
-	 List<UserInfo> selectByNickname (String nickname);
+	 UserInfo selectByNickname (String nickname);
 
 	/**
 	 * 根据Nickname更新

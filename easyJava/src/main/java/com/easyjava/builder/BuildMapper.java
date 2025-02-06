@@ -58,8 +58,9 @@ public class BuildMapper {
                         paramName.append(", ");
                     }
                 }
+                // 唯一索引查找结果最多一个对象，不可能是List
                 BuildComment.createMethodComment(bw, "根据" + methodName + "查询");
-                bw.write("\t List<T> selectBy" + methodName + " (" + paramName + ");\n\n");
+                bw.write("\t T selectBy" + methodName + " (" + paramName + ");\n\n");
 
                 // 更新多传一个Bean xml中bean是小写
                 // @Param("bean") T t

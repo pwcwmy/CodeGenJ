@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 /**
  * @Description: 用户信息ServiceImpl
  * @author: peter
- * @Date: 2025/02/35
+ * @Date: 2025/02/37
  */
 @Service("UserInfoService")
 public class UserInfoServiceImpl implements UserInfoService {
@@ -86,7 +86,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	 * 根据UserId查询
 	 */
 	@Override
-	public  List<UserInfo> selectByUserId (String userId) {
+	public  UserInfo selectByUserId (String userId) {
 		return this.userInfoMapper.selectByUserId(userId);
 	}
 
@@ -110,7 +110,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	 * 根据Email查询
 	 */
 	@Override
-	public  List<UserInfo> selectByEmail (String email) {
+	public  UserInfo selectByEmail (String email) {
 		return this.userInfoMapper.selectByEmail(email);
 	}
 
@@ -134,7 +134,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	 * 根据Nickname查询
 	 */
 	@Override
-	public  List<UserInfo> selectByNickname (String nickname) {
+	public  UserInfo selectByNickname (String nickname) {
 		return this.userInfoMapper.selectByNickname(nickname);
 	}
 

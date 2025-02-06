@@ -190,7 +190,7 @@ public class BuildServiceImpl {
                 }
                 BuildComment.createMethodComment(bw, "根据" + methodName + "查询");
                 bw.write("\t@Override\n");
-                bw.write("\tpublic  " + returnListName + " selectBy" + methodName + " (" + paramName + ") {\n");
+                bw.write("\tpublic  " + beanName + " selectBy" + methodName + " (" + paramName + ") {\n");
                 // return (List<UserInfo>) this.userInfoMapper.selectByUserId(userId);
                 bw.write("\t\treturn this." + lowerFirstBeanMapperName + ".selectBy" + methodName + "(" + mapperParamName + ");\n");
                 bw.write("\t}\n\n");

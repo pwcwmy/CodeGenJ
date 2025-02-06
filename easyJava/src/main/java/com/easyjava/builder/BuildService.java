@@ -117,7 +117,7 @@ public class BuildService {
                     }
                 }
                 BuildComment.createMethodComment(bw, "根据" + methodName + "查询");
-                bw.write("\t " + returnListName + " selectBy" + methodName + " (" + paramName + ");\n\n");
+                bw.write("\t " + beanName + " selectBy" + methodName + " (" + paramName + ");\n\n");
 
                 // 更新多传一个Bean xml中bean是小写
                 // @Param("bean") T t
