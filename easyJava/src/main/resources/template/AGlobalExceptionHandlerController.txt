@@ -6,8 +6,10 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.BindException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 
 // 前缀A是为了让排Controller包最上方
+@ControllerAdvice
 public class AGlobalExceptionHandlerController extends ABaseController {
     private Logger logger = LoggerFactory.getLogger(AGlobalExceptionHandlerController.class);
 
